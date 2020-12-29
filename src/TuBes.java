@@ -1,135 +1,89 @@
-import SQL.SQLCek;
-import SQL.SQLInsert;
-import data.DataDummy;
 
 import java.sql.*;
+import java.util.*;
+
 
 public class TuBes {
+    
+    
     public static void main(String[] args) {
-        String serverName = "DESKTOP-14NOJVT";
+        String serverName = "localhost";
         String databaseName = "TRANSPORTASI_PUBLIK_DB";
-        String user = "tubesdong";
-        String password = "pertubesanmania";
+        String user = "user1";
+        String password = "user1234";
         String url = "jdbc:sqlserver://" + serverName + ";databaseName=" + databaseName;
-        TuBes tuBes = new TuBes();
-
+        //TuBes tuBes = new TuBes();
+        
+        Connection conn = null;
         try {
-            Connection connection = DriverManager.getConnection(url, user, password);
-            tuBes.prepare(connection);
-            connection.close();
+            conn = DriverManager.getConnection(url, user, password);
+            //tuBes.prepare(connection);
+            System.out.println("Login Berhasil");
+
+            TuBes window = new TuBes();
+            
+            window.features(conn);
+
+            conn.close();
         } catch (SQLException e) {
+            System.out.println("Kesalahan ketika login");
             e.printStackTrace();
         }
+
     }
 
-    void prepare(Connection connection) {
-        SQLCek sqlCek = new SQLCek();
-        SQLInsert sqlInsert = new SQLInsert();
-        int kosong = sqlCek.KOTA(connection);
-        if (kosong == 1) {
-            for (int i=0; i<DataDummy.getListKota().size(); i++){
-                int row = sqlInsert.KOTA(connection, DataDummy.getListKota().get(i));
+
+    private void features(Connection conn) throws SQLException {
+        Control.MainDisplay mainDisplay = new Control.MainDisplay();
+        Control.editData editorData = new Control.editData();
+        data.Prepare prepare = new data.Prepare();
+
+
+        Scanner sc = new Scanner(System.in);
+        mainDisplay.displayTabel(conn);
+
+        mainDisplay.Display();
+        
+        
+
+        while (true) {
+            
+            int choice = sc.nextInt();
+
+            if (choice == 0) {
+                System.out.println("Keluar...");
+                sc.close();
+                break;
+            }
+            // TODO: Menjalankan fitur
+            switch (choice) {
+            case 1:
+            try {
+                mainDisplay.displayTabel(conn);
+                mainDisplay.showTabel(conn);
+            } catch (Exception e) {
+                //TODO: handle exception
+                e.printStackTrace();
+            } 
+                break;
+
+            case 2:
+                editorData.name(conn);
+                System.out.println("NOT YET");
+                break;
+            case 3:
+            System.out.println("NOT YET");    
+            try {
+                prepare.preparing(conn);
+                break;
+            } catch (Exception e) {
+                //TODO: handle exception
+                System.out.println("sto[[ed");
+            }
+            
+            
             }
         }
-        kosong = sqlCek.FASILITAS(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.FITUR(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.LAYANAN(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.PRODUSEN(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.CABANG_PRODUSEN(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.PEMILIK(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.ALAT_TRANSPORTASI(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.PESAWAT(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.HELIKOPTER(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.MOBIL_BUS(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.MOBIL_PENUMPANG(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.KERETA(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.KAPAL(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.TEMPAT_PEMBERHENTIAN(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.BANDARA(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.HELIPORT(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.TERMINAL(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.STASIUN(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.PELABUHAN(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.RUTE(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.TIKET(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.MEMILIKI_FITUR(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.MEMILIKI_RUTE(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.MEMILIKI_LAYANAN(connection);
-        if (kosong == 1) {
-
-        }
-        kosong = sqlCek.MEMILIKI_FASILITAS(connection);
-        if (kosong == 1) {
-
-        }
     }
+
 }

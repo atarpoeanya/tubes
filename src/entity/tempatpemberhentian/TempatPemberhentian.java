@@ -11,9 +11,8 @@ public class TempatPemberhentian {
     private int Luas_Area;
     private int Kapasitas_Pengunjung;
     private String Nomor_Telepon;
-    private String Email;
 
-    public TempatPemberhentian(String kode_Tempat_Pemberhentian, String kode_Kota, String nama, String alamat, int kapasitas_Alat_Transportasi, String tahun_Operasi, int jumlah_Karyawan, int luas_Area, int kapasitas_Pengunjung, String nomor_Telepon, String email) {
+    public TempatPemberhentian(String kode_Tempat_Pemberhentian, String kode_Kota, String nama, String alamat, int kapasitas_Alat_Transportasi, String tahun_Operasi, int jumlah_Karyawan, int luas_Area, int kapasitas_Pengunjung, String nomor_Telepon) {
         Kode_Tempat_Pemberhentian = kode_Tempat_Pemberhentian;
         Kode_Kota = kode_Kota;
         Nama = nama;
@@ -24,7 +23,6 @@ public class TempatPemberhentian {
         Luas_Area = luas_Area;
         Kapasitas_Pengunjung = kapasitas_Pengunjung;
         Nomor_Telepon = nomor_Telepon;
-        Email = email;
     }
 
     public String getKode_Tempat_Pemberhentian() {
@@ -105,13 +103,5 @@ public class TempatPemberhentian {
 
     public void setNomor_Telepon(String nomor_Telepon) {
         Nomor_Telepon = nomor_Telepon;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
     }
 }

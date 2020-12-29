@@ -1,4 +1,4 @@
-package SQL;
+package data;
 
 import entity.*;
 import entity.alatransportasi.*;
@@ -10,10 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SQLInsert {
+public class GenerateData {
     public int KOTA(Connection connection, Kota kota) {
         int hasil = 0;
-        String sql = "INSERT INTO  (Kode_Kota, Nama, Luas_Wilayah)"
+        String sql = "INSERT INTO KOTA (Kode_Kota, Nama, Luas_Wilayah)"
                 + " VALUES (?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -22,7 +22,7 @@ public class SQLInsert {
             preparedStatement.setInt(3, kota.getLuas_Wilayah());
             hasil = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Terjadi error saat insert ke tabel ");
+            System.out.println("Terjadi error saat insert ke tabel KOTA");
         }
         return hasil;
     }
@@ -267,7 +267,7 @@ public class SQLInsert {
 
     public int TEMPAT_PEMBERHENTIAN(Connection connection, TempatPemberhentian tempatPemberhentian) {
         int hasil = 0;
-        String sql = "INSERT INTO TEMPAT_PEMBERHENTIAN (Kode_Tempat_Pemberhentian, Kode_Kota, Nama, Alamat, Kapasitas_Alat_Transportasi, Tahun_Operasi, Jumlah_Karyawan, Luas_Area, Kapasitas_Pengunjung, Nomor_Telepon, Email)"
+        String sql = "INSERT INTO TEMPAT_PEMBERHENTIAN (Kode_Tempat_Pemberhentian, Kode_Kota, Nama, Alamat, Kapasitas_Alat_Transportasi, Tahun_Operasi, Jumlah_Karyawan, Luas_Area, Kapasitas_Pengunjung, Nomor_Telepon)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -281,7 +281,6 @@ public class SQLInsert {
             preparedStatement.setInt(8, tempatPemberhentian.getLuas_Area());
             preparedStatement.setInt(9, tempatPemberhentian.getKapasitas_Pengunjung());
             preparedStatement.setString(10, tempatPemberhentian.getNomor_Telepon());
-            preparedStatement.setString(11, tempatPemberhentian.getEmail());
             hasil = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Terjadi error saat insert ke tabel TEMPAT_PEMBERHENTIAN");
