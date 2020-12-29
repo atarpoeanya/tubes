@@ -8,19 +8,18 @@ import java.util.Scanner;
 
 
 public class editData {
+    Scanner sc = new Scanner(System.in);
 
     public void name(Connection conn) throws SQLException {
         MainDisplay disp = new MainDisplay();
-        Scanner sc = new Scanner(System.in);
 
         while (true) {
-
+            System.out.println("Edit Menu (Masukan Angka)\n\n1. \n2.Ubah suatu data\n3. Hapus data\n0. Kembali ke menu utama");
             
             int choice = sc.nextInt();
 
             if (choice == 0) {
                 System.out.println("Keluar...");
-                sc.close();
                 break;
             }
 
@@ -36,8 +35,8 @@ public class editData {
                 case 3:
 
                     disp.displayTabel(conn);
+                    System.out.println("\nPilih tabel yang ingin di edit");
                     deletData(conn);
-                    System.out.print("NOT YET");
                     break;
 
                 default:
@@ -48,8 +47,7 @@ public class editData {
     }
 
     private void deletData(Connection conn) throws SQLException {
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();//sc.next();
+        String str = sc.next();
         
 
         java.sql.Statement statement = conn.createStatement();
@@ -75,9 +73,10 @@ public class editData {
             System.out.println();
         }
         
-        
-        System.out.println(rSetMetaData.getColumnLabel(1));
-        String str1 = sc.nextLine();
+        //Display
+        System.out.print("\nKode tabel: " + rSetMetaData.getColumnLabel(1) + "\nMasukan row kode yang akan dihapus: ");
+
+        String str1 = sc.next();
         String sql = "DELETE FROM " + str + " WHERE " + rSetMetaData.getColumnLabel(1) + " = '"+ str1 + "'";
         try {
             statement = conn.createStatement();

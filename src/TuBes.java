@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.*;
 
 
+
 public class TuBes {
     
     
@@ -33,22 +34,26 @@ public class TuBes {
     }
 
 
+
     private void features(Connection conn) throws SQLException {
         Control.MainDisplay mainDisplay = new Control.MainDisplay();
         Control.editData editorData = new Control.editData();
+        Control.SpecialSQL spes = new Control.SpecialSQL();
         data.Prepare prepare = new data.Prepare();
 
 
         Scanner sc = new Scanner(System.in);
-        mainDisplay.displayTabel(conn);
-
-        mainDisplay.Display();
         
         
-
+        
+        
         while (true) {
+            mainDisplay.displayTabel(conn);
+            mainDisplay.Display();
+            try {
             
             int choice = sc.nextInt();
+
 
             if (choice == 0) {
                 System.out.println("Keluar...");
@@ -57,10 +62,12 @@ public class TuBes {
             }
             // TODO: Menjalankan fitur
             switch (choice) {
-            case 1:
-            try {
-                mainDisplay.displayTabel(conn);
-                mainDisplay.showTabel(conn);
+                case 1:
+                try {
+                    mainDisplay.cls();
+                    mainDisplay.displayTabel(conn);
+                    mainDisplay.showTabel(conn);
+                    mainDisplay.cls();
             } catch (Exception e) {
                 //TODO: handle exception
                 e.printStackTrace();
@@ -69,10 +76,10 @@ public class TuBes {
 
             case 2:
                 editorData.name(conn);
-                System.out.println("NOT YET");
+                
                 break;
             case 3:
-            System.out.println("NOT YET");    
+    
             try {
                 prepare.preparing(conn);
                 break;
@@ -80,10 +87,20 @@ public class TuBes {
                 //TODO: handle exception
                 System.out.println("sto[[ed");
             }
-            
+            case 4:
+
+                spes.driperCode(conn);
+                break;
             
             }
+            } catch(InputMismatchException e) {
+                System.out.println("Error");
+                e.printStackTrace();
+                sc.nextLine();
+                //sc = new Scanner(System.in);
+            } 
         }
+            
     }
 
 }

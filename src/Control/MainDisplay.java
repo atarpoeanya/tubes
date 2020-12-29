@@ -16,7 +16,7 @@ public class MainDisplay {
     Scanner sc = new Scanner(System.in);
     public void Display() {
 
-        System.out.println("\nPerintah tersedia:\n1. Tampilkan isi tabel\n2. Edit Tabel\n3. Masukan Dummy Data\n0. Keluar");
+        System.out.println("\n===============\nPerintah tersedia:\n1. Tampilkan isi tabel\n2. Edit Tabel\n3. Masukan Dummy Data\n4. Special Query\n0. Keluar");
 
         System.out.print("Selamat Datang\n\nSilahkan masukan perintah anda (Angka 0 - 3): ");
     }
@@ -48,6 +48,7 @@ public class MainDisplay {
         while(true){
             
             try {
+                System.out.println("\nMasukan nama tabel yang ingin dilihat (Masukan \"Kembali\" untuk mengakhiri perintah ini)");
                 String str = sc.next();
                 if(str.equalsIgnoreCase("kembali"))
                 break;
@@ -93,7 +94,12 @@ public class MainDisplay {
     
 
     public void cls (){
-
+        try {
+            new ProcessBuilder("cmd", "/C", "cls").inheritIO().start().waitFor();
+        } catch (Exception exc) {
+            System.out.println("ERROR: internal");
+            System.exit(1);
+        }
     }
 
 }

@@ -6,7 +6,7 @@ import SQL.SQLCek;
 public class Prepare {
     
     
-    public void preparing(Connection connection) {
+    public void preparing(Connection connection) throws InterruptedException {
         SQLCek sqlCek = new SQLCek();
         GenerateData generate = new GenerateData();
         if (sqlCek.KOTA(connection) == 1 && sqlCek.FASILITAS(connection) == 1 && sqlCek.FITUR(connection) == 1 &&
@@ -148,6 +148,9 @@ public class Prepare {
                 System.out.println(row);
             }
             System.out.println("insert");
+        } else  {
+            System.out.println("Dummy data sudah tersedia");
+            Thread.sleep(3000);
         }
     }
 }
